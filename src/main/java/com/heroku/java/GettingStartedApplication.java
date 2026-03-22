@@ -42,6 +42,7 @@ public class GettingStartedApplication {
             }
 
             model.put("records", output);
+            System.out.println("Jayce Lowry");
             return "database";
 
         } catch (Throwable t) {
