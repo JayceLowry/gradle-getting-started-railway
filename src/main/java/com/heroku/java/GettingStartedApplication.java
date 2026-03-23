@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -53,6 +55,27 @@ public class GettingStartedApplication {
 
     private String getRandomString() {
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    @GetMapping("/dbinput")
+    public String showForm() {
+        return "dbinput";
+    }
+
+    @PostMapping("/dbinput")
+    public String handleInput(@RequestParam("customString") String customString, Map<String, Object> model) {
+        try (Connection connection = dataSource.getConnection()) {
+            var statement = connection.prepareStatement(
+                    "INSERT INTO table_timestamp_and_random_string (tick, random_string) VALUES (now(), ?)"
+            );
+            statement.setString(1, customString);
+            statement.executeUpdate();
+
+            return "dbinput";
+        } catch (Exception e) {
+            model.put("message", e.getMessage());
+            return "error";
+        }
     }
 
     public static void main(String[] args) {

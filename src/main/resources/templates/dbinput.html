@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'db')}">
+<body>
+
+<div class="container">
+    <h1>Insert A Custom String</h1>
+    <form method="POST" action="/dbinput">
+        <div class="form-group">
+            <label for="customString">Custom String:</label>
+            <input type="text" name="customString" id="customString" placeholder="Enter String" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit to Database</button>
+    </form>
+    <a href="database">View Database</a>
+</div>
+
+</body>
+</html>
