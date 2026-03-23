@@ -44,7 +44,7 @@ public class GettingStartedApplication {
             }
 
             model.put("records", output);
-            System.out.println("Jayce Lowry");
+            System.out.println("Print statement inside the GettingStartedApplication.database() method. Jayce Lowry");
             return "database";
 
         } catch (Throwable t) {
